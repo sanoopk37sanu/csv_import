@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Exception;
-
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class CsvImportController
 {
@@ -33,18 +35,21 @@ class CsvImportController
         $failedCount = 0;
         $errors = [];
         while ($row = fgetcsv($file)) {
+
             try {
-                $this->validateRowData($row);
+                // $this->validateRowData($row);
                 $password = Str::random(10);
+                $formattedDate = Carbon::createFromFormat('d-M-y', $row[4])->format('Y-m-d');
                 $user = User::create([
                     'first_name' => $row[0],
                     'last_name' => $row[1],
                     'email' => $row[2],
                     'phone' => $row[3],
-                    'designation' => $row[4],
-                    'doj' => $row[5],
+                    'doj' =>  $formattedDate,
+                    'designation' => $row[5],
                     'password' => Hash::make($password),
                 ]);
+
                 // Send email to the user using event
 
                 $importedCount++;
