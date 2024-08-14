@@ -25,18 +25,5 @@ Route::name('admin.')->group(function () {
         Route::get('admin/csv_import', [CsvImportController::class, 'csv_import'])->name('csv.import');
         Route::post('admin/import-users', [CsvImportController::class, 'import'])->name('import-users');
         Route::get('admin/logout', [LoginController::class, 'logout'])->name('logout');
-        // Route::name('products.')->prefix('admin/products')->controller(ProductController::class)->group(function () {
-        //     Route::get('/', 'list')->name('list');
-        //     Route::get('create', 'create')->name('create');
-        //     Route::post('save',  'save')->name('save');
-        //     Route::get('edit/{id}',  'edit')->name('edit');
-        //     Route::post('update',  'update')->name('update');
-        //     Route::get('delete/{id}',  'delete')->name('delete');
-        // });
-
-
-
-
-
     });
 });
