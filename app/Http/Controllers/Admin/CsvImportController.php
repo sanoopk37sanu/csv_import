@@ -44,18 +44,20 @@ class CsvImportController
                     'designation' => $row[5],
                     'password' => Hash::make($password),
                 ]);
+                $user->decrypted_pass = $password;
+
+
+
                 // Send email to the user using event
                 event(new UserImported($user));
                 $importedCount++;
             } catch (Exception $e) {
                 // Log the error
                 // Log::error("Failed to import user: {$row[2]}, Error: " . $e->getMessage());
-
                 $failedCount++;
                 $errors[] = "Failed to import user with email {$row[2]}: " . $e->getMessage();
             }
         }
-
         fclose($file);
         $message = "Imported {$importedCount} users successfully.";
         if ($failedCount > 0) {

@@ -13,12 +13,14 @@ class WelcomeMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $user;
+    public $login_url;
     /**
      * Create a new message instance.
      */
     public function __construct($user)
     {
         $this->user = $user;
+        $this->login_url = url('/login');
     }
 
     /**
