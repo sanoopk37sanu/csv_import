@@ -45,9 +45,6 @@ class CsvImportController
                     'password' => Hash::make($password),
                 ]);
                 $user->decrypted_pass = $password;
-
-
-
                 // Send email to the user using event
                 event(new UserImported($user));
                 $importedCount++;
