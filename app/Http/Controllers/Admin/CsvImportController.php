@@ -24,18 +24,12 @@ class CsvImportController
         $request->validate([
             'csv_file' => 'required|mimes:csv,txt',
         ]);
-
         $file = fopen($request->file('csv_file'), 'r');
         $header = fgetcsv($file);
-        // $requiredColumns = ['firstName', 'lastName', 'email', 'phone', 'designation', 'doj'];
-        // if ($header !== $requiredColumns) {
-        //     return redirect()->back()->withErrors(['csv_file' => 'Invalid CSV format.']);
-        // }
         $importedCount = 0;
         $failedCount = 0;
         $errors = [];
         while ($row = fgetcsv($file)) {
-
             try {
                 $this->validateRowData($row);
                 $password = Str::random(10);
