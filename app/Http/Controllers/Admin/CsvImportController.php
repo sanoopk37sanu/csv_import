@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\UserImported;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
@@ -44,6 +45,8 @@ class CsvImportController
                     'password' => Hash::make($password),
                 ]);
                 // Send email to the user using event
+                event(new UserImported($user));
+
 
                 $importedCount++;
             } catch (Exception $e) {
