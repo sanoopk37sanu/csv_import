@@ -37,7 +37,7 @@ class CsvImportController
         while ($row = fgetcsv($file)) {
 
             try {
-                // $this->validateRowData($row);
+                $this->validateRowData($row);
                 $password = Str::random(10);
                 $formattedDate = Carbon::createFromFormat('d-M-y', $row[4])->format('Y-m-d');
                 $user = User::create([
