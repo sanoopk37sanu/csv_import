@@ -13,4 +13,5 @@
 5. Run migrations php artisan migrate
 5. php artisan make:seeder Adminseeder
 6. Start local server by executing php artisan serve
+6. admin login url :- http://127.0.0.1:8000/admin/login
 

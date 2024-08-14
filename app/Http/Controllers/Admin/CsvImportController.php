@@ -14,15 +14,11 @@ class CsvImportController
 {
     public function csv_import()
     {
-
         return view('admin.csv');
     }
 
-
-
     public function import(Request $request)
     {
-
         $request->validate([
             'csv_file' => 'required|mimes:csv,txt',
         ]);
@@ -49,7 +45,7 @@ class CsvImportController
                     'doj' => $row[5],
                     'password' => Hash::make($password),
                 ]);
-                // Send email to the user
+                // Send email to the user using event
 
                 $importedCount++;
             } catch (Exception $e) {
