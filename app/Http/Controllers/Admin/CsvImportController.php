@@ -49,7 +49,6 @@ class CsvImportController
                     'designation' => $row[5],
                     'password' => Hash::make($password),
                 ]);
-
                 // Send email to the user using event
 
                 $importedCount++;
