@@ -46,8 +46,6 @@ class CsvImportController
                 ]);
                 // Send email to the user using event
                 event(new UserImported($user));
-
-
                 $importedCount++;
             } catch (Exception $e) {
                 // Log the error
